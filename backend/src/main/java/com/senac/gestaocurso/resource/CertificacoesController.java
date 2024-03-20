@@ -13,8 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/certificacoes")
-public class CertificacoesController {
-
+public class CertificacoesController extends AbstractController {
         @Autowired
         private CertificacoesService certificacoesService;
 
@@ -25,8 +24,7 @@ public class CertificacoesController {
         }
 
         @GetMapping
-        public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page,
-                                       @RequestParam(defaultValue = "0") int size) {
+        public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
             Pageable pageable = PageRequest.of(page, size);
             Page<Certificacoes> certificacoes = certificacoesService.buscaTodos(pageable);
             return ResponseEntity.ok(certificacoes);

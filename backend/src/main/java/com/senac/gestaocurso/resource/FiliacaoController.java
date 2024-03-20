@@ -13,7 +13,7 @@ import java.net.URI;
 import java.util.List;
 @RestController
 @RequestMapping("api/filiacao")
-public class FiliacaoController {
+public class FiliacaoController extends AbstractController {
     @Autowired
     private FiliacaoService filiacaoService;
 
@@ -24,8 +24,7 @@ public class FiliacaoController {
     }
 
     @GetMapping
-    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "0") int size) {
+    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Filiacao> filiacao = filiacaoService.buscaTodos(pageable);
         return ResponseEntity.ok(filiacao);

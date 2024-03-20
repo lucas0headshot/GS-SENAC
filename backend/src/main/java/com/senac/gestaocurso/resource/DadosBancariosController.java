@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 @RestController
 @RequestMapping("api/dadosbancarios")
-public class DadosBancariosController {
+public class DadosBancariosController extends AbstractController {
     @Autowired
     private DadosBancariosService dadosBancariosService;
 
@@ -25,8 +25,7 @@ public class DadosBancariosController {
     }
 
     @GetMapping
-    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "0") int size) {
+    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<DadosBancarios> dadosBancarios = dadosBancariosService.buscaTodos(pageable);
         return ResponseEntity.ok(dadosBancarios);

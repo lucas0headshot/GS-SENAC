@@ -14,8 +14,7 @@ import java.net.URI;
 import java.util.List;
 @RestController
 @RequestMapping("api/turma")
-public class TurmaController {
-
+public class TurmaController extends AbstractController {
     @Autowired
     private TurmaService turmaService;
 
@@ -26,8 +25,7 @@ public class TurmaController {
     }
 
     @GetMapping
-    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page,
-                                   @RequestParam(defaultValue = "0") int size) {
+    public  ResponseEntity findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Turma> funcionarios = turmaService.buscaTodos(pageable);
         return ResponseEntity.ok(funcionarios);
